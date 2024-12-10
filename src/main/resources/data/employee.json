@@ -1,8 +1,8 @@
 [
   {
-    "FirstName": "Sam" ,
-    "LastName": "Jackson" ,
-    "EmployeeID": 1000 ,
+    "FirstName": "Sam",
+    "LastName": "Jackson",
+    "EmployeeID": "1000",
     "Designation": "Manager",
     "KnownLanguages": [
       {
@@ -20,9 +20,9 @@
     ]
   },
   {
-    "FirstName": "John" ,
-    "LastName": "Adamo" ,
-    "EmployeeID": 2000 ,
+    "FirstName": "John",
+    "LastName": "Adamo",
+    "EmployeeID": "2000",
     "Designation": "Developer",
     "KnownLanguages": [
       {
@@ -36,6 +36,46 @@
       {
         "LanguageName": "C++",
         "ScoreOutof100": 70
+      }
+    ]
+  },
+  {
+    "FirstName": "Ahmed",
+    "LastName": "Saad",
+    "EmployeeID": "2121",
+    "Designation": "Manager",
+    "KnownLanguages": [
+      {
+        "LanguageName": "Java",
+        "ScoreOutof100": 90
+      },
+      {
+        "LanguageName": "C#",
+        "ScoreOutof100": 50
+      },
+      {
+        "LanguageName": "C++",
+        "ScoreOutof100": 80
+      }
+    ]
+  },
+  {
+    "FirstName": "Ali",
+    "LastName": "Ali",
+    "EmployeeID": "2721",
+    "Designation": "Manager",
+    "KnownLanguages": [
+      {
+        "LanguageName": "Java",
+        "ScoreOutof100": 90
+      },
+      {
+        "LanguageName": "C#",
+        "ScoreOutof100": 50
+      },
+      {
+        "LanguageName": "C++",
+        "ScoreOutof100": 80
       }
     ]
   }

@@ -3,7 +3,6 @@ package com.json.Json_Manager;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -26,13 +25,24 @@ public class JsonManager {
 
     //------------------------------------------------------------------------------------------------------------
 
-    public static ArrayList<Employee>  showAll(){
+    public static ArrayList<Employee> showAll() {
         return employeeList;
     }
-    public static Employee addEmployee(Employee employee) {
-        return new Employee();
-    }
 
+    public static Employee addEmployee(Employee employee) {
+        // Check if ID is unique
+        if (!isIdUnique(employee.getEmployeeID())) {
+            throw new IllegalArgumentException("Employee ID must be unique.");
+        }
+
+        // Add the new employee to the list
+        employeeList.add(employee);
+
+        // Save the updated list to the JSON file
+        saveJson();
+
+        return employee;
+    }
     public static ArrayList<Employee> searchByID(String id) {
         return new ArrayList<>();
     }
@@ -41,26 +51,33 @@ public class JsonManager {
         return new ArrayList<>();
     }
 
-
     public static String deleteEmployee(String id) {
         return "";
     }
 
     public static Employee updateEmployee(Employee updatedEmployee) {
-        return new Employee();
+        for (int i = 0; i < employeeList.size(); i++) {
+            if (employeeList.get(i).getEmployeeID().equals(updatedEmployee.getEmployeeID())) {
+                // Update employee details
+                employeeList.set(i, updatedEmployee);
+                saveJson();
+                return updatedEmployee;
+            }
+        }
+        throw new IllegalArgumentException("Employee with ID " + updatedEmployee.getEmployeeID() + " not found.");
     }
+
 
     public static ArrayList<Employee> retrieveAndSort() {
         return new ArrayList<>();
     }
-
 
     //------------------------------------------------------------------------------------------------------------
 
     private static ArrayList<Employee> readJson() throws IOException {
         ObjectMapper objectMapper = new ObjectMapper();
 
-        // Deserialize JSON into a list of Employee objects
+        // convert JSON into a list of Employee objects
         ArrayList<Employee> employees = objectMapper.readValue(new File(FILE_PATH), new TypeReference<ArrayList<Employee>>() {});
 
         // Print each employee and their details
@@ -80,9 +97,27 @@ public class JsonManager {
 
     //------------------------------------------------------------------------------------------------------------
 
-
     private static void saveJson() {
+        ObjectMapper objectMapper = new ObjectMapper();
 
+        try {
+            // convert the employeeList to the JSON file
+            objectMapper.writeValue(new File(FILE_PATH), employeeList);
+            System.out.println("Employee list successfully saved to " + FILE_PATH);
+        } catch (IOException e) {
+            System.err.println("Error saving employee list: " + e.getMessage());
+        }
+    }
+
+    //------------------------------------------------------------------------------------------------------------
+
+    private static boolean isIdUnique(String id) {
+        for (Employee employee : employeeList) {
+            if (employee.getEmployeeID().equals(id)) {
+                return false;
+            }
+        }
+        return true;
     }
 
     //------------------------------------------------------------------------------------------------------------
