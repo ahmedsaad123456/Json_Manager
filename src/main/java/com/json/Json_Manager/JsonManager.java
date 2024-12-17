@@ -52,7 +52,15 @@ public class JsonManager {
     }
 
     public static String deleteEmployee(String id) {
-        return "";
+
+        boolean removed = employeeList.removeIf(employee -> employee.getEmployeeID().equals(id));
+
+        if (removed) {
+            saveJson(); // Save changes to the JSON file
+            return "Employee with ID " + id + " has been successfully deleted.";
+        } else {
+            return "Employee with ID " + id + " not found.";
+        }
     }
 
     public static Employee updateEmployee(Employee updatedEmployee) {
