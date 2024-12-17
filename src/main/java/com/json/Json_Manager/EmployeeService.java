@@ -47,8 +47,8 @@ public class EmployeeService {
 
     //------------------------------------------------------------------------------------------------------------
     // Retrieve and sort employees by name
-    public ArrayList<Employee> retrieveAndSort() {
-        return JsonManager.retrieveAndSort();
+    public ArrayList<Employee> retrieveAndSort(Language language) {
+        return JsonManager.retrieveAndSort(language);
     }
 
     //------------------------------------------------------------------------------------------------------------

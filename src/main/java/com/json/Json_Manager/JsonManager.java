@@ -55,7 +55,7 @@ public class JsonManager {
                 System.out.println("not found");
             }
         }
-        return null;
+        throw new IllegalArgumentException("ID not found");
     }
 
     public static ArrayList<Employee> searchByDesignation(String designation) {
@@ -65,6 +65,9 @@ public class JsonManager {
             if (employee.getDesignation().equalsIgnoreCase(designation)) {
                 result.add(employee);
             }
+        }
+        if(result.isEmpty()){
+            throw new IllegalArgumentException("designation not found");
         }
        return result;
     }
@@ -94,14 +97,15 @@ public class JsonManager {
     }
 
 
-    public static ArrayList<Employee> retrieveAndSort() {
+    public static ArrayList<Employee> retrieveAndSort(Language lang) {
 
         ArrayList<Employee> result = new ArrayList<>();
 
         for (Employee employee : employeeList) {
 
             for (Language language : employee.getKnownLanguages()) {
-                if (language.getLanguageName().equalsIgnoreCase("Java") && language.getScoreOutOf100() > 50) {
+                if (language.getLanguageName().equalsIgnoreCase(lang.getLanguageName()) &&
+                        language.getScoreOutOf100() > lang.getScoreOutOf100()) {
                     result.add(employee);
                     break;
                 }
@@ -114,6 +118,10 @@ public class JsonManager {
             int score2 = getJavaScore(e2);
             return Integer.compare(score1, score2);
         });
+
+        if(result.isEmpty()){
+            throw new IllegalArgumentException("Data not found");
+        }
 
         return result;
     }

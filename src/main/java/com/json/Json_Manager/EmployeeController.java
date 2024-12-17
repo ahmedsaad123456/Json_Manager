@@ -83,8 +83,8 @@ public class EmployeeController {
 
     // retrieve employees and sort the result
     @GetMapping(value = "/retrieve")
-    public ArrayList<Employee> retrieveAndSort(){
-        return service.retrieveAndSort();
+    public ArrayList<Employee> retrieveAndSort(@RequestBody Language language){
+        return service.retrieveAndSort(language);
 
     }
 
