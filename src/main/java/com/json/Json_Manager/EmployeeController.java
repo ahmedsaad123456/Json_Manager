@@ -43,11 +43,8 @@ public class EmployeeController {
 
     // search by id
     @GetMapping(value = "/searchByID")
-    public ArrayList<Employee> searchByID(@RequestBody String id){
-
+    public Employee searchByID(@RequestBody String id) {
         return service.searchByID(id);
-
-
     }
 
     //------------------------------------------------------------------------------------------------------------

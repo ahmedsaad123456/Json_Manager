@@ -22,7 +22,7 @@ public class EmployeeService {
 
     //------------------------------------------------------------------------------------------------------------
     // Search employee by ID
-    public ArrayList<Employee> searchByID(String id) {
+    public Employee searchByID(String id) {
         return JsonManager.searchByID(id);
     }
 

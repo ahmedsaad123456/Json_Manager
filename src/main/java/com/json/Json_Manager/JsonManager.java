@@ -2,6 +2,8 @@ package com.json.Json_Manager;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.io.File;
 import java.io.IOException;
@@ -43,12 +45,28 @@ public class JsonManager {
 
         return employee;
     }
-    public static ArrayList<Employee> searchByID(String id) {
-        return new ArrayList<>();
+    public static Employee searchByID(String id) {
+        System.out.println("searching for id " + id);
+        for (Employee employee : employeeList) {
+            if (employee.getEmployeeID().equals(id)) {
+                return employee;
+            }
+            else {
+                System.out.println("not found");
+            }
+        }
+        return null;
     }
 
     public static ArrayList<Employee> searchByDesignation(String designation) {
-        return new ArrayList<>();
+        ArrayList<Employee> result = new ArrayList<>();
+
+        for (Employee employee : employeeList) {
+            if (employee.getDesignation().equalsIgnoreCase(designation)) {
+                result.add(employee);
+            }
+        }
+       return result;
     }
 
     public static String deleteEmployee(String id) {
