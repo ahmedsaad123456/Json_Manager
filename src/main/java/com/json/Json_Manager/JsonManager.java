@@ -77,8 +77,39 @@ public class JsonManager {
 
 
     public static ArrayList<Employee> retrieveAndSort() {
-        return new ArrayList<>();
+
+        ArrayList<Employee> result = new ArrayList<>();
+
+        for (Employee employee : employeeList) {
+
+            for (Language language : employee.getKnownLanguages()) {
+                if (language.getLanguageName().equalsIgnoreCase("Java") && language.getScoreOutOf100() > 50) {
+                    result.add(employee);
+                    break;
+                }
+            }
+        }
+
+        // Sort the result by the language score in ascending order
+        result.sort((e1, e2) -> {
+            int score1 = getJavaScore(e1);
+            int score2 = getJavaScore(e2);
+            return Integer.compare(score1, score2);
+        });
+
+        return result;
     }
+
+    // Helper method to get the Java score for an employee
+    private static int getJavaScore(Employee employee) {
+        for (Language language : employee.getKnownLanguages()) {
+            if (language.getLanguageName().equalsIgnoreCase("Java")) {
+                return language.getScoreOutOf100();
+            }
+        }
+        return -1;
+    }
+
 
     //------------------------------------------------------------------------------------------------------------
 
